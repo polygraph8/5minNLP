@@ -1,0 +1,121 @@
+# *5分钟NLP - 命名实体识别
+
+### 1、简介
+
+#### 1.1 NER 研究的实体：
+
+​        3大类：实体，时间，数字3类
+​        7小类：人名，地名，机构名、时间、日期、货币、百分比
+
+数量、时间、日期、货币、百分比 ： 正则模式匹配即可
+
+人名-地名-机构名是主要研究对象
+
+#### 1.2 中文命名实体识别难点：
+
+a、大多数人名为未登录词
+b、人名 规则构成各异【中文-日文】
+c、机构名组成复杂
+d、嵌套，长度
+
+#### 1.3 基本方法
+
+1、基于规则： 带权重规则+词典
+2、基于统计: 与分词类似，隐马尔科夫，最大熵，条件随机场
+3、混合方法：结合规则和统计方法。
+
+
+
+### 2、条件随机场方法
+
+#### 2.1 引入
+
+HMM认为 输出观察值独立以及状态转移仅仅与前一状态相关。HMM 是在给定当前状态下，定义下一个状态的分布。
+但是观察序列更多的是一种多重交互特征形式表现出来，观察元素之间广泛存在长程相关性。
+
+条件随机场在给定观察的标记序列下，计算整个标记序列的联合概率。
+
+#### 2.2 建模
+
+X为字符序列, Y 为标签序列,  那么条件概率分布 P(X|Y) 就是条件随机场 P(Yv|X,Yw w<>v) = P(Yv|X , Yw w~v)  v以外的所有节点         v 有连接的节点 
+
+P(Y|X) 满足P(Yi|X,Y1,Y2,....,Yn) = P(Yi,|X,Yi-1,Yi+1) ,则P(Y|X) 为线性链的条件随机场。
+
+### 3.3 实现
+
+#### 1、定义命名实体标记
+
+ B M E S O 
+
+例如：ns 得到地名例如 [香港ns 特别a 行政区n] 得到香港特别行政区 标记为BMMMMME ,
+
+非地名的为O
+
+#### 2、定义一个特征函数集合
+
+```ruby
+#Unigram
+U00:%x[-1,0]   取上一个字符
+U01:%x[0,0]    取当前字符
+U02:%x[1,0]    取下一字符
+U03:%x[2,0]
+U04:%x[-2,0]
+U05:%x[1,0]/%x[2,0] 
+U06:%x[0,0]/%x[-1,0]/%x[-2,0]
+U07:%x[0,0]/%x[1,0]/%x[2,0]
+U08:%x[-1,0]/%x[0,0]
+U09:%x[0,0]/%x[1,0]
+U10:%x[-1,0]/%x[1,0]
+
+#Bigram
+B
+```
+
+假如输入序列长度为N，那么一个Unigram模版将会产生N∗L个特征函数  
+
+例如：
+
+一个这样的Bigram模版”B01:%x[0,1]”，会考虑当前输出标签还有上一个输出标签，类似的会产生如下特征函数：
+func = (if output="B" and feature="U01:"北" return 1 else return 0 )
+
+#### 3、计算
+
+转移函数Tk(Yi-1,Yi,i) i-1    转移到i 上的标记为Yi的概率    
+状态函数Si(Yi,X,i)               在位置i 上标记为Yi 的概率
+特征函数取值为1或0         
+
+完整的函数为：假设有K个转移函数，l个状态函数
+   P(Y|X)  = 1/Z(X)  *  exp( Sum ik (Wk, Tk(Yi-1,Yi,i))  +  Sum ij (uS(Yi,X,i) )
+   Z(X)     =  SUM(exp( Sum ik (Wk, Tk(Yi-1,Yi,i))  +  Sum ij (uS(Yi,X,i) ))   
+
+
+
+#### 4、识别 
+
+```
+    tagger = load_model('./model')
+    for c in text:
+        tagger.add(c)
+    result = []
+
+    # parse and change internal stated as 'parsed'
+    tagger.parse()
+    word = ''
+    for i in range(0, tagger.size()):
+        for j in range(0, tagger.xsize()):
+            ch = tagger.x(i, j)
+            tag = tagger.y2(i)
+            if tag == 'B':
+                word = ch
+            elif tag == 'M':
+                word += ch
+            elif tag == 'E':
+                word += ch
+                result.append(word)
+            elif tag == 'S':
+                word = ch
+                result.append(word)
+```
+
+
+
