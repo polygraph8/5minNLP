@@ -138,7 +138,7 @@ Hierarchical Softmax
 为了避免要计算所有词的softmax概率，word2vec采样了霍夫曼树[词频为权值]来代替从隐藏层到输出softmax层的映射。也叫做层次Softmax，softmax概率计算只需要沿着树形结构进行就可以了。
 ```
 
-![image-20201019035625953](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019035625953.png)
+
 
 
 
@@ -160,8 +160,6 @@ Negative Sampling 负采样
 输入是特定的一个词wt的词向量，而输出是特定词对应的上下文词向量。
 
 
-
-![image-20201019035339487](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019035339487.png)
 
 ###### word2vec的源码地址
 
