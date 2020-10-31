@@ -55,7 +55,9 @@ John  [1,0,0,0,0,0,0,0,0,0]  维数为词个数
 
 第一层为映射层，第二层为隐藏层，第三层为输出层见下图：
 
-![image-20201019021921959](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019021921959.png)
+![image-20201019021921959](image/image-20201019021921959.png)
+
+
 
    [1]词库大小(假定有1300个词)       
 
