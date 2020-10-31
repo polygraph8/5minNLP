@@ -12,7 +12,9 @@ http://www.docin.com/p-2177206264.html
 深度迁移学习，知识图谱引擎
 问答标注平台，模型训练平台，分布式爬虫，hadoop 集群
 
-![image.png](../5minRecomm/image/10553589-0e08bfd9cf5b43cb.png)
+![image.png](../5minRec/image/10553589-0e08bfd9cf5b43cb.png)
+
+
 
 
 
@@ -26,7 +28,7 @@ FAQ 机器人直接给出问题的答案
 
 1、query 处理
 
-​                                 query -> 纠错->标准化->文本特征提取->query改写[同义词]
+​                            query ->   纠错->   标准化->文本特征提取->query改写[同义词]
 
 2、候选集召回：            BM25 算法 
 
@@ -105,7 +107,7 @@ NLG- 生成回复文本
 
 1、规约问题
 
-![img](../5minRecomm/image/10553589-91b1add60e324ce4.png)
+![img](../5minRec/image/10553589-91b1add60e324ce4.png)
 
 2、逐步引导
 
@@ -129,15 +131,15 @@ ASR, NLP, TTS,MRCP
 **外呼统计**
 任务监控，通话监控，意向度筛选，通话详情，统计分析
 
-![image.png](../5minRecomm/image/10553589-feab149ac8d7a0aa.png)
+![image.png](../5minRec/image/10553589-feab149ac8d7a0aa.png)
 
 
 
 智能应答
 
-![image.png](../5minRecomm/image/10553589-3c9819f890df53ed.png)
+![image.png](../5minRec/image/10553589-3c9819f890df53ed.png)
 
 
 
-#### 
+
 

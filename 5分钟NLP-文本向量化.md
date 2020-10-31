@@ -119,6 +119,10 @@ cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model, l
 
 ###### 2.2.1  CBOW 模型
 
+![image-20201031190527905](5%E5%88%86%E9%92%9FNLP-%E6%96%87%E6%9C%AC%E5%90%91%E9%87%8F%E5%8C%96/image-20201031190527905.png)
+
+
+
 思路就是：输入中间词前后共C个词，预测中间词，在这个过程中训练出我们需要的词向量矩阵。
 
 和NNLM 区别在于：
@@ -138,14 +142,6 @@ Hierarchical Softmax
 为了避免要计算所有词的softmax概率，word2vec采样了霍夫曼树[词频为权值]来代替从隐藏层到输出softmax层的映射。也叫做层次Softmax，softmax概率计算只需要沿着树形结构进行就可以了。
 ```
 
-
-
-
-
-
-
-
-
 Negative Sampling 负采样
 
 ```
@@ -159,11 +155,15 @@ Negative Sampling 负采样
 
 输入是特定的一个词wt的词向量，而输出是特定词对应的上下文词向量。
 
+<img src="5%E5%88%86%E9%92%9FNLP-%E6%96%87%E6%9C%AC%E5%90%91%E9%87%8F%E5%8C%96/image-20201031190550674.png" alt="image-20201031190550674" style="zoom:90%;" />
 
 
-###### word2vec的源码地址
 
-在https://code.google.com/archive/p/word2vec/ ，github上面也有克隆的word2vec源码，https://github.com/svn2github/word2vec。
+###### word2vec源码地址
+
+https://code.google.com/archive/p/word2vec/ ，
+
+https://github.com/svn2github/word2vec。
 
 
 
