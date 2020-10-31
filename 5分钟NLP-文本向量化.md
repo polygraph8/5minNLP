@@ -27,16 +27,18 @@ John  [1,0,0,0,0,0,0,0,0,0]  维数为词个数
 通过统计一个事先指定大小的窗口内的word共现次数，以word周边的共现词的次数做为当前word的vector。
 得到的是一个NxN 的矩阵。
 
-![image-20201019021247116](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019021247116.png)
+![image-20201019021247116](image/image-20201019021247116.png)
+
+
 
 
 
 #### 1.3、共现矩阵的SVD降维
 
 对共现矩阵X做矩阵分解（如奇异值分解）得到矩阵正交矩阵U，对U进行归一化得到一个稠密的连续词向量矩阵，即视为所有词的词向量。
-![image-20201019021309669](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019021309669.png)
+![image-20201019021309669](image/image-20201019021309669.png)
 
-![image-20201019021325701](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019021325701.png)
+![image-20201019021325701](image/image-20201019021325701.png)
 
 ## 二、深度学习方法
 
@@ -75,7 +77,7 @@ John  [1,0,0,0,0,0,0,0,0,0]  维数为词个数
 
 输出： WxC = [10-1 ,  30 ] =[9,30 ]
 
-<img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201019023024367.png" alt="image-20201019023024367" style="zoom:80%;" />
+<img src="image/image-20201019023024367.png" alt="image-20201019023024367" style="zoom:80%;" />
 
 例如 "我" "爱" "北京" 来预测 "天安门"先得到 前3个词的向量
 
@@ -89,7 +91,7 @@ John  [1,0,0,0,0,0,0,0,0,0]  维数为词个数
 
 输出：经过tanh函数的激活
 
-<img src="https://upload-images.jianshu.io/upload_images/10553589-12f7e301d25b280f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" style="zoom:50%;" />
+![image-20201031192059224](5%E5%88%86%E9%92%9FNLP-%E6%96%87%E6%9C%AC%E5%90%91%E9%87%8F%E5%8C%96/image-20201031192059224.png)
 
 
 
@@ -103,7 +105,9 @@ John  [1,0,0,0,0,0,0,0,0,0]  维数为词个数
 softmax用于多分类过程中，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！
 ```
 
-![image.png](https://upload-images.jianshu.io/upload_images/10553589-eb36f234316b8946.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image-20201031192116012](5%E5%88%86%E9%92%9FNLP-%E6%96%87%E6%9C%AC%E5%90%91%E9%87%8F%E5%8C%96/image-20201031192116012.png)
+
+
 
 ##### 损失： 用原始向量 - 得到的输出 
 
