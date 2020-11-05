@@ -1,5 +1,9 @@
 # 5分钟NLP应用 -文本分类
 
+[toc]
+
+
+
 ### 1、文本分类-垃圾邮件
 
 #### 1.1、提取tfidf 特征 TfidfVectorizer类
@@ -24,7 +28,7 @@ def tfidf_extractor(corpus, ngram_range=(1, 1)):
 
 定义分类器
 
-    
+
     from sklearn.naive_bayes import MultinomialNB   多项式贝叶斯分类器multinomialNB
     from sklearn.linear_model import SGDClassifier  SVM 
     from sklearn.linear_model import Logistic       线性回归     

@@ -1,5 +1,7 @@
 # 五分钟NLP - 句法分析
 
+[toc]
+
 ## 一、理论基础：Chomsky形式文法
 
 Chomsky文法用 G G*G* 表示形式语法，将其表示为四元组：
@@ -39,9 +41,7 @@ Chomsky范式 :
 Chomsky证明，任何由上下文无关文法生成的语言，均可由重写规则为A → B C或者 A → x的文法生成，其中A , B , C ∈ Vn , x ∈ Vt 
 ```
 
-由此文法生成句子的过程图如下：
 
-![image-20201018225934584](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201018225934584.png)
 
 
 

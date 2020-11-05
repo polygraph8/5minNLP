@@ -22,6 +22,10 @@
 
 [8 NLP应用 智能客服](5分钟NLP-智能客服.md)
 
+[9 NLP应用 知识图谱](5分钟NLP-知识图谱.md)
+
+
+
 评价指标
 
 正确率P：OUTPUT正确/OUTPUT_NUM
