@@ -6,13 +6,66 @@
 
 ### 一、知识图谱简介
 
+#### 1.1 定义
+
 知识图谱以结构化的形式描述客观世界中概念、实体及其关系。
 
 结构化知识是以图形式进行表示，图的节点表示语义符号（实体，概念），图的边表示符号之间的语义关系（主题曲-演唱歌曲-父亲-儿子-子类），此外每个实体还有指向非实体级别的边（通常称之为属性），如：人物的出生日期，主要成就等。
 
 ![1604560874431](%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/1604560874431.png)
 
-### 二、topbase 简介
+#### 1.2、构建流程
+
+
+
+![image-20201108001529479](5%E5%88%86%E9%92%9FNLP-%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20201108001529479.png)
+
+#### 1.3 现有知识图谱
+
+DBpedia
+
+Wikidata
+
+复旦大学GDM实验室中文知识图谱CN-DBpedia
+
+中文开放知识图谱联盟
+
+#### 1.4 应用 
+
+##### 商城智能客服
+
+通过构建商品类目-商品信息-评论信息-促销优惠信息-支付信息-物流信息知识图谱，这样一张大的图可以帮助我们对用户所提的问题进行解释回答，某种程度是
+
+![image-20201108003840368](5%E5%88%86%E9%92%9FNLP-%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20201108003840368.png)
+
+
+
+
+
+知识图谱设计：
+![image-20201108004031071](5%E5%88%86%E9%92%9FNLP-%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20201108004031071.png)
+
+
+
+##### 页面搭建
+
+设想是将商品关联关键词，这样通过关键词来在知识图谱中找到关联商品，可实时的根据当前流行的关键词找出商品做落地页，将同类关联的商品聚合起来，放在资源落地页，实时高效。
+
+##### 商品推荐
+
+通过构建买家的搜索、浏览、下单等关系，构建买家-商品两者的知识图谱，从用户出发，向一些用户推荐商品，这其实不仅仅考虑到知识图谱，更考虑如何刻画用户画像，对用户的年纪、经历的事情做一些简单的刻画，毕竟大多数人都要经过“小学 - > 初中 - > 高中 - > 大学 - > 工作租房 - > 买房 - > 结婚 - > 养育小孩”等等阶段，不同阶段的用户需求是不一样的，但别人的需求在未来就可能是你的需求，我们结合这些行为，把需求 - 商品的关系抽象化，在未来就可以重复应用在不用用户身上。
+
+##### 金融行业应用
+
+1、 股票投研情报分析
+通过知识图谱相关技术从招股书、年报、公司公告、券商研究报告、新闻等半结构化表格和非结构化文本数据中批量自动抽取公司的股东、子公司、供应商、客户、合作伙伴、竞争对手等信息，构建出公司的知识图谱。在某个宏观经济事件或者企业相关事件发生的时候，券商分析师、交易员、基金公司基金经理等投资研究人员可以通过此图谱做更深层次的分析和更好的投资决策，比如在美国限制向中兴通讯出口的消息发布之后，如果我们有中兴通讯的客户供应商、合作伙伴以及竞争对手的关系图谱，就能在中兴通讯停牌的情况下快速地筛选出受影响的国际国内上市公司从而挖掘投资机会或者进行投资组合风险控制。
+
+2、反欺诈分析
+通过融合来自不同数据源的信息构成知识图谱，同时引入领域专家建立业务专家规则。我们通过数据不一致性检测，利用绘制出的知识图谱可以识别潜在的欺诈风险。比如借款人张xx和借款人吴x填写信息为同事，但是两个人填写的公司名却不一样, 以及同一个电话号码属于两个借款人，这些不一致性很可能有欺诈
+
+
+
+### 二、topbase 技术体系简介
 
  TopBase  包括知识图谱体系构建，数据生产流程，以及存储查询系统 。
 
@@ -311,15 +364,88 @@ topbase 以规则推理为主
 
 ### 五、知识库的存储和查询
 
+#### 5.1 存储知识图谱的工具
+
+主要分为两类：第一类是RDF存储系统，另一类是图数据库。
+
+- RDF一个重要的设计原则是数据的易发布以及共享，其次，RDF以三元组的方式来存储数据而且不包含属性信息。主要有：jena, rdf4j ,redland ， magiclogic 
+
+  RDF序列化的方式主要有：RDF/XML，N-Triples，Turtle，RDFa，JSON-LD.
+
+  例如：rdf/XML 
+
+  ```
+  <?xml version="1.0"?>
+  
+  <rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"   ##  rdf 是命名空间的简称
+  xmlns:cd="http://www.recshop.fake/cd#">                           ##  cd  也是简称，属性的简称
+  
+  <rdf:Description
+   rdf:about="http://www.recshop.fake/cd/Empire Burlesque">  ## 直接用rdf来表示
+    <cd:artist>Bob Dylan</cd:artist>
+    <cd:country>USA</cd:country>
+    <cd:company>Columbia</cd:company>
+    <cd:price>10.90</cd:price>
+    <cd:year>1985</cd:year>
+  </rdf:Description>
+  
+  <rdf:Description
+   rdf:about="http://www.recshop.fake/cd/Hide your heart">
+    <cd:artist>Bonnie Tyler</cd:artist>
+    <cd:country>UK</cd:country>
+    <cd:company>CBS Records</cd:company>
+    <cd:price>9.90</cd:price>
+    <cd:year>1988</cd:year>
+  </rdf:Description>
+  .
+  .
+  .
+  </rdf:RDF>
+  ```
+
+  ```
+  turtle 存储格式：
+  @prefix person: <http://www.kg.com/person/> .    # 加@prefix  利用person 代替后面网址命名空间
+  @prefix place: <http://www.kg.com/place/> .
+  @prefix : <http://www.kg.com/ontology/> .            # 这个还不清楚是干什么的
+  
+  person:1 :chineseName "罗纳尔多·路易斯·纳萨里奥·德·利马"^^string.
+  person:1 :career "足球运动员"^^string.
+  person:1 :fullName "Ronaldo Luís Nazário de Lima"^^string.
+  person:1 :birthDate "1976-09-18"^^date.
+  person:1 :height "180"^^int. 
+  person:1 :weight "98"^^int.
+  person:1 :nationality "巴西"^^string. 
+  person:1 :hasBirthPlace place:10086.
+  place:10086 :address "里约热内卢"^^string.
+  place:10086 :coordinate "-22.908333, -43.196389"^^string.
+  
+  ```
+
+  
+
+- 图数据库则把重点放在了高效的图查询和搜索上。图数据库一般以属性图为基本的表示形式，所以实体和关系可以包含属性，这就意味着更容易表达现实的业务场景。主要工具有：neo4j, cosmos DB,arangodb,
+
+  ![image-20201108001946279](5%E5%88%86%E9%92%9FNLP-%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20201108001946279.png)
+
+
+
+#### 5.2topbase的存储查询方案
+
  JanusGraph  开源，超大图， 超大规模并发事务和可操作图运算  
 
 查询语句： Gremlin
 
 复杂查询：  Es 构建复杂查询的数据索引   
 
- 图数据库存储服务 ：  ScyllaDb 
+图数据库存储服务 ：  ScyllaDb 
 
- Graph_Loader  ： 转换为JanusGraph  格式
+Graph_Loader  ： 转换为JanusGraph  格式
+
+
+
+- 
 
 
 
